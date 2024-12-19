@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Le Chef Cuisinier - Accueil</title>
     <style>
+<<<<<<< HEAD
         /* Styles as per the previously used theme with modifications */
+=======
+>>>>>>> 6b85a20c4fdf46aa201b21ed653e1debcff86f6d
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+<<<<<<< HEAD
             background-color: #1a1a1a;
+=======
+            background-color: #1a1a1a; 
+>>>>>>> 6b85a20c4fdf46aa201b21ed653e1debcff86f6d
             color: #fff;
         }
 
@@ -101,6 +108,7 @@
             margin-bottom: 20px;
         }
 
+<<<<<<< HEAD
        .menu-container {
             display: flex;
             flex-wrap: wrap;
@@ -147,6 +155,49 @@
               text-decoration: none;
             font-size: 1rem;
           }
+=======
+         .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+             max-width: 1200px;
+            margin: 0 auto;
+       }
+
+        .menu-item {
+            border: 1px solid rgba(255,215,0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: rgba(255,255,255, 0.05);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease;
+           }
+        .menu-item:hover {
+          transform: translateY(-2px);
+        }
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .menu-item-details {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .menu-item-details h3 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .menu-item-details p {
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+>>>>>>> 6b85a20c4fdf46aa201b21ed653e1debcff86f6d
 
         .button {
             display: inline-block;
@@ -169,6 +220,7 @@
             top: 0;
             left: 0;
             width: 100%;
+<<<<<<< HEAD
             height: 100%;
             background-color: rgba(255,215,0, 0.2);
             transform: translateX(-100%);
@@ -179,6 +231,18 @@
             background-color: #e6bc00;
             box-shadow: 0 3px 8px rgba(255, 215, 0, 0.5);
             transform: translateY(-2px);
+=======
+             height: 100%;
+            background-color: rgba(255,215,0, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+             z-index: -1;
+        }
+        .button:hover {
+            background-color: #e6bc00;
+            box-shadow: 0 3px 8px rgba(255, 215, 0, 0.5);
+             transform: translateY(-2px);
+>>>>>>> 6b85a20c4fdf46aa201b21ed653e1debcff86f6d
         }
         .button:hover::before {
             transform: translateX(0);
@@ -210,6 +274,7 @@
         </section>
         <section class="featured-menus">
             <h2>Aperçu de nos Menus</h2>
+<<<<<<< HEAD
             <div class="menu-container" id="menu-container">
             <!-- Menu cards as in User Dashboard -->
                   <div class="menu-card">
@@ -236,5 +301,44 @@
             </div>
         </section>
     </main>
+=======
+            <div class="menu-grid" id="menu-container">
+                </div>
+        </section>
+    </main>
+    <script>
+         const menuContainer = document.getElementById('menu-container');
+        const menuCategories = ['pizza', 'burger', 'pasta', 'steak', 'dessert', 'salad']; 
+        const numImagesPerCategory = 2; 
+
+      async function fetchMenus() {
+            for (const category of menuCategories) {
+                  for(let i = 1; i <= numImagesPerCategory; i++){
+                       try {
+                         const imageUrl = `https://foodish-api.com/images/${category}/${category}${i}.jpg`;
+                           const response = await fetch(imageUrl);
+                            if(response.ok) {
+                                const menuItem = document.createElement('div');
+                                menuItem.classList.add('menu-item');
+                                menuItem.innerHTML = `
+                                    <img src="${imageUrl}" alt="${category} ${i}">
+                                    <div class="menu-item-details">
+                                         <h3>Menu ${category} ${i}</h3>
+                                          <p>Découvrez ce menu exceptionnel.</p>
+                                     </div>
+                                `;
+                              menuContainer.appendChild(menuItem);
+                             } else {
+                               console.error(`Error fetching image for ${category} ${i}, status: ${response.status}`);
+                                }
+                        } catch (error) {
+                            console.error(`Error fetching image for ${category} ${i}, error:`, error);
+                        }
+                    }
+                }
+        }
+     fetchMenus();
+    </script>
+>>>>>>> 6b85a20c4fdf46aa201b21ed653e1debcff86f6d
 </body>
 </html>
