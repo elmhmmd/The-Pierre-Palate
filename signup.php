@@ -38,14 +38,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if($checkUsername->get_result()->num_rows > 0) {
             $errors[] = "Username already exists";
         } 
+        $checkUsername->close();
 
         $checkEmail = $conn->prepare("SELECT email FROM users WHERE email = ?");
         $checkEmail->bind_param("s", $email);
         $checkEmail->execute();
 
-        if($checkUsername->get_result()->num_rows > 0) {
+        if($checkEmail->get_result()->num_rows > 0) {
             $errors[] = "Email already in use";
         }
+        $checkEmail->close();
 
 
         if (empty($errors)) {
@@ -126,6 +128,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="password" id="confirm_password" name="confirm_password" required class="w-full px-4 py-3 bg-transparent border-b-2 border-gold text-white text-base outline-none focus:ring-0 focus:shadow-[0_3px_6px_rgba(255,215,0,0.3)] transition-all duration-300">
                 </div>
             </div>
+            <?php
+    if (isset($_SESSION['message'])) {
+    echo '<div style="color: green;">' . $_SESSION['message'] . '<br>' . '</div>';
+    unset($_SESSION['message']);
+    }
+    ?>
             <button type="submit" class="button block w-full py-3 bg-gold text-dark-bg border-none rounded-md cursor-pointer text-lg font-bold relative overflow-hidden z-10 hover:bg-gold-hover hover:shadow-[0_4px_10px_rgba(255,215,0,0.5)] hover:translate-y-[-2px] transition-all duration-300 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-[rgba(255,215,0,0.2)] before:translate-x-[-100%] before:transition-transform before:duration-300 hover:before:translate-x-0">S'inscrire</button>
         </form>
         <p class="text-center mt-5">Vous avez déjà un compte? <a href="login.php" class="text-gold hover:underline">Connectez-vous</a></p>
