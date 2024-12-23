@@ -12,9 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title']);
     $price = floatval($_POST['price']);
     $description = trim($_POST['description']);
-    $dishes = $_POST['dishes']; // Array of dish names
+    $dishes = $_POST['dishes'];
 
-    // Start transaction
+    
     $conn->begin_transaction();
 
     try {
